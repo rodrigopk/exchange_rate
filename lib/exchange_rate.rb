@@ -14,13 +14,13 @@ module ExchangeRate
 
 
   def ExchangeRate.read_exchange_data    
-    @@ECB_DATA ||= Nokogiri::XML(open(ECB_URL).read).remove_namespaces!
+    @@ECB_DATA ||= Nokogiri::XML(open(ECB_URL).read)
   end
 
   def ExchangeRate.rate_for_currency(timestamp,currency)
   	ExchangeRate
   		.read_exchange_data
-  		.xpath("//Cube/Cube[@time = '#{timestamp}']/Cube[@currency = '#{currency}']/@rate")
+  		.xpath("gesmes:Envelope/xmlns:Cube/xmlns:Cube[@time = '#{timestamp}']/xmlns:Cube[@currency = '#{currency}']/@rate")
   		.first.value.to_f
   end
 

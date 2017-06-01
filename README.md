@@ -1,8 +1,13 @@
 # ExchangeRate
-Short description and motivation.
+A plugin to obtain exchange rates between currencies, using data from ECB.
 
 ## Usage
-How to use my plugin.
+Here’s an ecample of how to use the library where, GBP is the base currency and USD is the counter currency:
+
+
+```ruby
+ExchangeRate.at(Date.today,'GBP','USD')
+```
 
 ## Installation
 Add this line to your application's Gemfile:
@@ -20,9 +25,6 @@ Or install it yourself as:
 ```bash
 $ gem install exchange_rate
 ```
-
-## Contributing
-Contribution directions go here.
 
 ## License
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
