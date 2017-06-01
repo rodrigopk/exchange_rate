@@ -10,9 +10,14 @@ module ExchangeRate
   end
 
 
-  def ExchangeRate.get_exchange_data
-    xml_content = open(EXCHANGE_URL).read
-    puts xml_content    
+  def ExchangeRate.read_exchange_data    
+    Nokogiri::XML(open(EXCHANGE_URL).read).remove_namespaces!
+  end
+
+  def ExchangeRate.rate_for_currency(timestamp,currency)
+  	ExchangeRate
+  		.read_exchange_data
+  		.xpath("//Cube/Cube[@time = '#{timestamp}']/Cube[@currency = '#{currency}']/@rate")
   end
 
 end
