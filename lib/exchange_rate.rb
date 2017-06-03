@@ -61,9 +61,12 @@ module ExchangeRate
   end
 
   def self.rate_for_currency(timestamp,currency)
-    cache
-      .xpath("gesmes:Envelope/xmlns:Cube/xmlns:Cube[@time = '#{timestamp}']/xmlns:Cube[@currency = '#{currency}']/@rate")
-      .first.value.to_f
+    cube = cache
+            .xpath("gesmes:Envelope/xmlns:Cube/xmlns:Cube[@time = '#{timestamp}']/xmlns:Cube[@currency = '#{currency}']/@rate")
+            .first
+            
+    raise 'Currency not found' if cube.nil?
+    return cube.value.to_f
   end
 
   set_cache(fetch_data)
