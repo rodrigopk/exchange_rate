@@ -15,15 +15,18 @@ class ExchangeRate::Test < ActiveSupport::TestCase
     assert_equal 1.1217, ExchangeRate.rate_for_currency(@date.to_s,'USD')
   end
 
-  def test_exception_for_inexistent_currency
-    assert_raise RuntimeError do
-      ExchangeRate.rate_for_currency(@date.to_s,'AAA')
-    end
+  def test_currency_available
+    assert_not ExchangeRate.available?('AAA')
   end
-
 
   def test_at_return    
     assert_equal 1.2853508731722967, ExchangeRate.at(@date,'GBP','USD')
+  end
+
+  def test_exception_for_inexistent_currency
+    assert_raise RuntimeError do
+      ExchangeRate.at(@date,'GBP','AAA')
+    end
   end
 
 end
