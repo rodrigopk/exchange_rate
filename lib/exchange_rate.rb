@@ -77,6 +77,5 @@ module ExchangeRate
   def self.available?(currency)
     CURRENCIES.include?(currency)
   end
-
-  set_cache(fetch_data)
+  
 end
